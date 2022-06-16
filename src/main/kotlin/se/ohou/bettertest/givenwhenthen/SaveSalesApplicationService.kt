@@ -5,7 +5,15 @@ class SaveSalesApplicationService(
     private val salesApplicationPort: SalesApplicationPort,
 ) {
 
-    fun updateSalesApplication(command: UpdateCommand) {}
+    fun updateSalesApplication(command: UpdateCommand) {
+        salesApplicationValidator.valid(command)
+        var salesApplicationForUpdate = salesApplicationPort.findById(command.id)
+            ?: throw NoSuchElementException()
+        salesApplicationForUpdate = salesApplicationForUpdate.copy(
+            content = command.content
+        )
+        salesApplicationPort.update(salesApplicationForUpdate)
+    }
 
     data class UpdateCommand(
         val id: Long,
