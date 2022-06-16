@@ -30,11 +30,11 @@ dependencies {
 
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 
-    testImplementation("io.kotest:kotest-runner-junit5:4.6.4")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.4")
+    testImplementation("io.kotest:kotest-runner-junit5:5.3.0")
+    testImplementation("io.kotest:kotest-assertions-core:5.3.0")
     testImplementation("io.kotest:kotest-extensions-spring:4.4.3")
-    testImplementation("io.mockk:mockk:1.11.0")
-    testImplementation("com.ninja-squad:springmockk:3.0.1")
+    testImplementation("io.mockk:mockk:1.12.4")
+    testImplementation("com.ninja-squad:springmockk:3.1.1")
 }
 
 tasks.withType<KotlinCompile> {
