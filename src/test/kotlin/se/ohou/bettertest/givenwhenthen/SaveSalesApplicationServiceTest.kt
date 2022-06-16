@@ -5,6 +5,7 @@ import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
+import io.mockk.slot
 import se.ohou.bettertest.givenwhenthen.SaveSalesApplicationService.UpdateCommand
 
 class SaveSalesApplicationServiceTest : BehaviorSpec({
@@ -34,6 +35,12 @@ class SaveSalesApplicationServiceTest : BehaviorSpec({
             } returns SalesApplication(id, "old")
 
             When("상품판매신청서 수정이 실행되면") {
+
+                val slot = slot<SalesApplication>()
+                every {
+                    port.update(capture(slot))
+                } answers { slot.captured }
+
                 saveSalesApplicationService.updateSalesApplication(validCommand)
                 Then("DB에 정상적으로 업데이트 된다") {
                 }
@@ -67,7 +74,6 @@ class SaveSalesApplicationServiceTest : BehaviorSpec({
         When("상품판매신청서 수정이 실행되면") {
             saveSalesApplicationService.updateSalesApplication(notValidCommand)
             Then("Validation Error 가 발생한다") {
-
             }
         }
     }
